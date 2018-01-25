@@ -1,0 +1,9 @@
+Line Charts
+plt.plot(unrate_in_1948["DATE"],unrate_in_1948["VALUE"])
+plt.xticks(rotation=90)
+plt.xlabel("Month")
+plt.ylabel("Unemployment Rate")
+plt.title("Monthly Unemployment Trends, 1948")
+plt.show()
+
+Multiple plots
