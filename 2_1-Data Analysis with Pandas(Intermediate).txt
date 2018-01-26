@@ -1,0 +1,114 @@
+Getting started with NumPy------------------------------------------------------
+import numpy as np
+vector = np.array([10, 20, 30])
+matrix = np.array([[5, 10, 15], [20, 25, 30], [35, 40, 45]])
+vector_shape=vector.shape
+matrix_shape=matrix.shape
+
+world_alcohol=np.genfromtxt("world_alcohol.csv",delimiter=",")
+world_alcohol=np.genfromtxt("world_alcohol.csv",delimiter=",",dtype="U75",skip_header=True)
+
+Computation with NumPy----------------------------------------------------------
+vector = numpy.array(["1", "2", "3"])
+vector = vector.astype(float)
+
+matrix.sum(axis=1)
+mean() 
+max() 
+vector = numpy.array([5, 10, 15, 20])
+vector.sum()
+
+
+Introduction to Pandas
+food_info=pd.read_csv("food_info.csv")
+column_names = food_info.columns
+first_rows = food_info.head()
+dimensions = food_info.shape
+num_rows = dimensions[0]
+num_cols = dimensions[1]
+
+food_info.loc[0]
+
+DataFrame.dtypes
+
+ndb_col = food_info["NDB_No"]
+zinc_copper = food_info[["Zinc_(mg)", "Copper_(mg)"]]
+
+
+Data Manipulation with pandas---------------------------------------------------
+div_1000 = food_info["Iron_(mg)"] / 1000
+
+Series.min() 
+Series.max() 
+
+DataFrame.sort_values()
+
+It's important to pass the keyword argument errors="coerce" when we call 
+pandas.to_numeric(), so that pandas treats any invalid strings it can't convert 
+to numbers as missing values instead.
+pandas.to_numeric() 
+
+Working with Missing Data-------------------------------------------------------
+pandas.isnull()
+sex = titanic_survival["sex"]
+sex_is_null = pandas.isnull(sex)
+
+Series.mean() 
+
+Dataframe.pivot_table()
+titanic_survival.pivot_table(index="pclass", values="fare", aggfunc=np.mean)
+
+DataFrame.dropna()
+drop_na_rows = titanic_survival.dropna(axis=0)
+
+Dataframe.loc[]
+DataFrame.iloc[]
+
+
+
+DataFrame.apply() 
+def which_class(row):
+    pclass = row['pclass']
+    if pd.isnull(pclass):
+        return "Unknown"
+    elif pclass == 1:
+        return "First Class"
+    elif pclass == 2:
+        return "Second Class"
+    else:
+        return "Third Class"
+classes = titanic_survivors.apply(which_class, axis=1)
+
+Challenge: Summarizing Data-----------------------------------------------------
+Series.unique() 
+
+Pandas Internals: Series--------------------------------------------------------
+Series.reindex()
+original_index = series_custom.index
+current_index=sorted(original_index)
+sorted_by_index=series_custom.reindex(current_index)
+
+
+Series.sort_index()
+Series.sort_values()
+sc2=series_custom.sort_index()
+sc3=series_custom.sort_values()
+
+rt_users = Series(fandango['RottenTomatoes_User'].values, index=fandango['FILM'])
+rt_mean=(rt_critics+rt_users)/2
+
+Pandas Internals: Dataframes----------------------------------------------------
+DataFrame.set_index()
+fandango_films=fandango.set_index('FILM',inplace=False,drop=False)
+
+DataFrame.apply()
+rt_mt_user = float_df[['RT_user_norm', 'Metacritic_user_nom']]
+rt_mt_user.apply(lambda x: np.std(x), axis=1)
+
+DataFrame.reset_index() 
+titanic_reindexed=new_titanic_survival.reset_index(drop=True)
+
+pandas.DataFrame.corr()
+correlations = combined.corr()
+correlations = correlations["sat_score"]
+print(correlations)

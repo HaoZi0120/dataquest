@@ -1,0 +1,80 @@
+Conditional Plots---------------------------------------------------------------
+sns.distplot(titanic["Age"])
+plt.show()
+
+sns.kdeplot(titanic["Age"],shade=True)
+plt.xlabel("Age")
+plt.show()
+
+In the last few missions, we explored some general aesthetics guidelines for 
+plots. The default seaborn style sheet gets some things right, like hiding axis 
+ticks, and some things wrong, like displaying the coordinate grid and keeping 
+all of the axis spines. We can use the seaborn.set_style() function to change 
+the default seaborn style sheet. Seaborn comes with a few style sheets:
+    darkgrid: Coordinate grid displayed, dark background color
+    whitegrid: Coordinate grid displayed, white background color
+    dark: Coordinate grid hidden, dark background color
+    white: Coordinate grid hidden, white background color
+    ticks: Coordinate grid hidden, white background color, ticks visible
+	
+sns.set_style('white')
+sns.kdeplot(titanic['Age'], shade=True)
+sns.despine(left=True, bottom=True)
+plt.xlabel('Age')
+
+
+g = sns.FacetGrid(titanic, col="Pclass", size=6)
+g.map(sns.kdeplot, "Age", shade=True)
+sns.despine(left=True, bottom=True)
+plt.show()
+
+g = sns.FacetGrid(titanic, col="Survived", row="Pclass")
+g.map(sns.kdeplot, "Age", shade=True)
+sns.despine(left=True, bottom=True)
+plt.show()
+
+g = sns.FacetGrid(titanic, col="Survived", row="Pclass", hue="Sex", size=3)
+g.map(sns.kdeplot, "Age", shade=True)
+g.add_legend()
+sns.despine(left=True, bottom=True)
+plt.show()
+
+Visualizing Geographic Data-----------------------------------------------------
+Here's what the general workflow will look like when working with two-dimensional maps:
+    Create a new basemap instance with the specific map projection we want to use and how much of the map we want included.
+    Convert spherical coordinates to Cartesian coordinates using the basemap instance.
+    Use the matplotlib and basemap methods to customize the map.
+    Display the map.
+	
+from mpl_toolkits.basemap import Basemap
+m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180)
+longitudes = airports["longitude"].tolist()
+latitudes = airports["latitude"].tolist()
+x, y = m(longitudes, latitudes)
+m.scatter(x, y, s=1)
+m.drawcoastlines()
+plt.show()
+
+DataFrame.info()
+
+
+In this mission, we learned how to visualize geographic data using basemap. 
+This is the last mission in the Storytelling Through Data Visualization course. 
+You should now have a solid foundation in data visualization for exploring data 
+and communicating insights. We encourage you to keep exploring 
+data visualization on your own. 
+Here are some suggestions for what to do next:
+
+    Plotting tools:
+        Creating 3D plots using Plotly
+		https://plot.ly/python/3d-scatter-plots/
+        Creating interactive visualizations using bokeh
+		http://bokeh.pydata.org/en/latest/
+        Creating interactive map visualizations using folium
+		https://folium.readthedocs.io/en/latest/
+    The art and science of data visualization:
+        Visual Display of Quantitative Information
+		https://www.amazon.com/Visual-Display-Quantitative-Information/dp/0961392142
+        Visual Explanations: Images and Quantities, Evidence and Narrative
+		https://www.amazon.com/Visual-Explanations-Quantities-Evidence-Narrative/dp/0961392126
+
